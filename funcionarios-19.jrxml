@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="funcionarios-19" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7da366d2-62e5-441d-bbd7-2970195f33a7">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL Udemy Data Adapter"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT jaspercurso.empresas.razao_social,
+jaspercurso.empresas.cnpj,
+jaspercurso.funcionarios.nome,
+jaspercurso.funcionarios.foto,
+jaspercurso.funcionarios.data_admissao,
+jaspercurso.funcionarios.data_demissao,
+jaspercurso.cargos.titulo,
+jaspercurso.enderecos.uf,
+jaspercurso.enderecos.cidade,
+CONCAT("http://starreports.com.br/certificados?cid=",jaspercurso.funcionarios.id_funcionario) as qrcode
+FROM jaspercurso.empresas,
+	jaspercurso.funcionarios
+	INNER JOIN jaspercurso.cargos ON
+	jaspercurso.funcionarios.id_cargo = jaspercurso.cargos.id_cargo
+	INNER JOIN jaspercurso.enderecos ON
+	jaspercurso.funcionarios.id_endereco = jaspercurso.enderecos.id_endereco
+	INNER JOIN jaspercurso.niveis ON
+	jaspercurso.funcionarios.id_nivel = jaspercurso.niveis.id_nivel
+WHERE
+	jaspercurso.funcionarios.data_demissao is not null
+	AND
+	jaspercurso.niveis.id_nivel = 1]]>
+	</queryString>
+	<field name="razao_social" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="razao_social"/>
+		<property name="com.jaspersoft.studio.field.label" value="razao_social"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="empresas"/>
+	</field>
+	<field name="cnpj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="cnpj"/>
+		<property name="com.jaspersoft.studio.field.label" value="cnpj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="empresas"/>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="funcionarios"/>
+	</field>
+	<field name="foto" class="byte[]">
+		<property name="com.jaspersoft.studio.field.name" value="foto"/>
+		<property name="com.jaspersoft.studio.field.label" value="foto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="funcionarios"/>
+	</field>
+	<field name="data_admissao" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="data_admissao"/>
+		<property name="com.jaspersoft.studio.field.label" value="data_admissao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="funcionarios"/>
+	</field>
+	<field name="data_demissao" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="data_demissao"/>
+		<property name="com.jaspersoft.studio.field.label" value="data_demissao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="funcionarios"/>
+	</field>
+	<field name="titulo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="titulo"/>
+		<property name="com.jaspersoft.studio.field.label" value="titulo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cargos"/>
+	</field>
+	<field name="uf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="uf"/>
+		<property name="com.jaspersoft.studio.field.label" value="uf"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="enderecos"/>
+	</field>
+	<field name="cidade" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="cidade"/>
+		<property name="com.jaspersoft.studio.field.label" value="cidade"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="enderecos"/>
+	</field>
+	<field name="qrcode" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="qrcode"/>
+		<property name="com.jaspersoft.studio.field.label" value="qrcode"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="555" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="802" height="555" uuid="3a4f9cb8-36d1-4778-9005-d25202961122"/>
+				<imageExpression><![CDATA["images/background.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement mode="Opaque" x="10" y="30" width="780" height="40" backcolor="#FFFFFF" uuid="3fabdc4e-3941-4ba3-b8af-e5e18dd863a2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CERTIFICADO DE PARTICIPAÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="110" width="802" height="30" uuid="6b8b5e09-c9e6-46cb-8b0a-52737dd4360d"/>
+				<textElement textAlignment="Center">
+					<font size="22"/>
+				</textElement>
+				<text><![CDATA[Conferimos o presente certificado a]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="170" width="802" height="50" forecolor="#FFFFFF" uuid="ed753117-29f5-4a77-a48a-cbf14372b695"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="260" width="755" height="160" uuid="7c8afa42-8285-4741-beeb-7eab13967db2"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" Pela conclusão do programa de treinamento na empresa " +  $F{razao_social}  + ", iniciado em <b>" + new SimpleDateFormat("dd/MM/yyyy").format($F{data_admissao}) +"</b> e finalizado em <b>" +  new SimpleDateFormat("dd/MM/yyyy").format($F{data_demissao}) + "</b>, na sede da empresa localizada em <b>" +$F{cidade} + "/" + $F{uf} + "</b> ocupando a posição de <b>" + $F{titulo} + "</b> com muito empenho e dedicação."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="120" y="440" width="570" height="30" uuid="7013ae38-48e1-4d17-99ff-9a374dbcf7d2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[<b>Beltrano da Silva</b><br>Coordenador e Gerente de Avaliação.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="480" width="802" height="30" uuid="174b2501-ce51-426a-8ef8-dd883ead9eb3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{razao_social}.concat("-").concat($F{cnpj})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
